@@ -7,12 +7,6 @@ class Loader:
 
     :param filename_test: The filename for the test data
     :type filename_test: str
-    :param filename_green: The file name for the result of green responses
-    :type filename_green: str
-    :param filename_red: The file name for the result of red responses
-    :type filename_red: str
-    :param filename_blue: The file name for the result of blue responses
-    :type filename_blue: str
     :param green: Content read from file for green result
     :type green: str
     :param blue: Content read from file for blue result
@@ -23,18 +17,9 @@ class Loader:
     :type test: list
     """
 
-    def __init__(
-        self,
-        filename_test: str,
-        filename_green: str,
-        filename_red: str,
-        filename_blue: str,
-    ):
+    def __init__(self, filename_test: str):
         """Constructor method"""
         self.filename_test = filename_test
-        self.filename_green = filename_green
-        self.filename_red = filename_red
-        self.filename_blue = filename_blue
         self.green = None
         self.blue = None
         self.red = None
@@ -84,19 +69,31 @@ class Loader:
                 type_answ = AnswerType.BLUE
         return type_answ
 
-    def read_green_file(self) -> None:
-        """Read the contents of the file for green results."""
-        with open(self.filename_green, "r", encoding="utf-8") as f:
+    def read_green_file(self, filename_green: str) -> None:
+        """Read the contents of the file for green results.
+        
+        :param filename_green: The file name for the result of green responses
+        :type filename_green: str
+        """
+        with open(filename_green, "r", encoding="utf-8") as f:
             self.green = f.read()
 
-    def read_red_file(self) -> None:
-        """Read the contents of the file for red results."""
-        with open(self.filename_red, "r", encoding="utf-8") as f:
+    def read_red_file(self, filename_red: str) -> None:
+        """Read the contents of the file for red results.
+
+        :param filename_red: The file name for the result of red responses
+        :type filename_red: str
+        """
+        with open(filename_red, "r", encoding="utf-8") as f:
             self.red = f.read()
 
-    def read_blue_file(self) -> None:
-        """Read the contents of the file for blue results."""
-        with open(self.filename_blue, "r", encoding="utf-8") as f:
+    def read_blue_file(self, filename_blue: str) -> None:
+        """Read the contents of the file for blue results.
+
+        :param filename_blue: The file name for the result of blue responses
+        :type filename_blue: str
+        """
+        with open(filename_blue, "r", encoding="utf-8") as f:
             self.blue = f.read()
 
 
