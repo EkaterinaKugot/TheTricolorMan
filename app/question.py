@@ -6,11 +6,11 @@ class Question:
 
     :param text: The text of the question
     :type text: str
-    :param answers: A tuple containing response instances
-    :type answers: tuple[Answer, ...]
+    :param answers: A list containing response instances
+    :type answers: list
     """
 
-    def __init__(self, text: str, answers: tuple[Answer, ...]):
+    def __init__(self, text: str, answers: list):
         """Constructor method"""
         self.text = text
         self.answers = answers
