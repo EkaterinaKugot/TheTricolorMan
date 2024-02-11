@@ -29,4 +29,4 @@ class Answer:
         :return: representation of the Answer instance
         :rtype: str
         """
-        return f"Answer: {self.text}, {self.type_}"
+        return f"Answer: {self.text} {self.type_}"

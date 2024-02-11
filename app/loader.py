@@ -1,5 +1,6 @@
 from .answer import Answer, AnswerType
 from .question import Question
+import os
 
 
 class Loader:
@@ -20,45 +21,52 @@ class Loader:
         :rtype: list
         """
         test = []
-        with open(self.filename_test, "r", encoding="utf-8") as f:
-            for line in f:
-                answers = []
-                for i in range(3):
-                    type_answ = self.determine_type_answer(i)
-                    answer = Answer(type_answ, f.readline())
-                    answers.append(answer)
-                question = Question(line, answers)
-                test.append(question)
+        currentdir = os.path.dirname(os.path.abspath(__file__))
+        test_file = os.path.join(currentdir, 'data', self.filename_test)
+        if(os.path.isfile(test_file)):
+            with open(test_file, "r", encoding="utf-8") as f:
+                for line in f:
+                    answers = []
+                    for i in range(3):
+                        type_answ = self.determine_type_answer(i, test)
+                        answer = Answer(type_answ, f.readline().rstrip())
+                        answers.append(answer)
+                    question = Question(line.rstrip(), answers)
+                    test.append(question)
+        else:
+            raise FileNotFoundError("The file does not exist")
         return test
 
 
-    def determine_type_answer(self, i: int) -> AnswerType:
+    def determine_type_answer(self, i: int, test: list) -> AnswerType:
         """Determine the type of answer based on the index.
 
         :param i: The index used to determine the answer type
         :type i: int
+        :param test: List of downloaded test questions
+        :type test: list
         :return: The type of the answer
         :rtype: AnswerType
         """
         type_answ = None
         if i == 0:
-            if len(self.test) < 5:
+            if len(test) < 5:
                 type_answ = AnswerType.GREEN
-            elif len(self.test) < 10:
+            elif len(test) < 10:
                 type_answ = AnswerType.BLUE
             else:
                 type_answ = AnswerType.RED
         elif i == 1:
-            if len(self.test) < 5:
+            if len(test) < 5:
                 type_answ = AnswerType.BLUE
-            elif len(self.test) < 10:
+            elif len(test) < 10:
                 type_answ = AnswerType.RED
             else:
                 type_answ = AnswerType.GREEN
         elif i == 2:
-            if len(self.test) < 5:
+            if len(test) < 5:
                 type_answ = AnswerType.RED
-            elif len(self.test) < 10:
+            elif len(test) < 10:
                 type_answ = AnswerType.GREEN
             else:
                 type_answ = AnswerType.BLUE
@@ -72,9 +80,12 @@ class Loader:
         :return: result for green responses
         :rtype: str
         """
-        with open(filename_green, "r", encoding="utf-8") as f:
-            green = f.read()
-            return green
+        if(os.path.isfile(filename_green)):
+            with open(filename_green, "r", encoding="utf-8") as f:
+                green = f.read()
+                return green
+        raise FileNotFoundError("The file does not exist")
+        
 
     def read_red_file(self, filename_red: str) -> str:
         """Read the contents of the file for red results.
@@ -84,9 +95,11 @@ class Loader:
         :return: result for red responses
         :rtype: str
         """
-        with open(filename_red, "r", encoding="utf-8") as f:
-            red = f.read()
-            return red
+        if(os.path.isfile(filename_red)):
+            with open(filename_red, "r", encoding="utf-8") as f:
+                red = f.read()
+                return red
+        raise FileNotFoundError("The file does not exist")
 
     def read_blue_file(self, filename_blue: str) -> str:
         """Read the contents of the file for blue results.
@@ -96,9 +109,11 @@ class Loader:
         :return: result for blue responses
         :rtype: str
         """
-        with open(filename_blue, "r", encoding="utf-8") as f:
-            blue = f.read()
-            return blue
+        if(os.path.isfile(filename_blue)):
+            with open(filename_blue, "r", encoding="utf-8") as f:
+                blue = f.read()
+                return blue
+        raise FileNotFoundError("The file does not exist")
 
 
     
