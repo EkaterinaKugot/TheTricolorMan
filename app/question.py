@@ -1,6 +1,3 @@
-from .answer import Answer
-
-
 class Question:
     """Class representing a question with its text and answers.
 

@@ -17,6 +17,7 @@ class Loader:
     def read_test_file(self) -> list:
         """Read test questions from the test file.
         
+        :raises FileNotFoundError: The path to the test file was not found
         :return: List of downloaded test questions
         :rtype: list
         """
@@ -34,9 +35,8 @@ class Loader:
                     question = Question(line.rstrip(), answers)
                     test.append(question)
         else:
-            raise FileNotFoundError("The file does not exist")
+            raise FileNotFoundError("The test file does not exist")
         return test
-
 
     def determine_type_answer(self, i: int, test: list) -> AnswerType:
         """Determine the type of answer based on the index.
@@ -77,43 +77,45 @@ class Loader:
         
         :param filename_green: The file name for the result of green responses
         :type filename_green: str
-        :return: result for green responses
+        :raises FileNotFoundError: Green results file path not found
+        :return: Result for green responses
         :rtype: str
         """
         if(os.path.isfile(filename_green)):
             with open(filename_green, "r", encoding="utf-8") as f:
                 green = f.read()
                 return green
-        raise FileNotFoundError("The file does not exist")
+        raise FileNotFoundError("The green file does not exist")
         
-
     def read_red_file(self, filename_red: str) -> str:
         """Read the contents of the file for red results.
 
         :param filename_red: The file name for the result of red responses
         :type filename_red: str
-        :return: result for red responses
+        :raises FileNotFoundError: Red results file path not found
+        :return: Result for red responses
         :rtype: str
         """
         if(os.path.isfile(filename_red)):
             with open(filename_red, "r", encoding="utf-8") as f:
                 red = f.read()
                 return red
-        raise FileNotFoundError("The file does not exist")
+        raise FileNotFoundError("The red file does not exist")
 
     def read_blue_file(self, filename_blue: str) -> str:
         """Read the contents of the file for blue results.
 
         :param filename_blue: The file name for the result of blue responses
         :type filename_blue: str
-        :return: result for blue responses
+        :raises FileNotFoundError: BLue results file path not found
+        :return: Result for blue responses
         :rtype: str
         """
         if(os.path.isfile(filename_blue)):
             with open(filename_blue, "r", encoding="utf-8") as f:
                 blue = f.read()
                 return blue
-        raise FileNotFoundError("The file does not exist")
+        raise FileNotFoundError("The blue file does not exist")
 
 
     
