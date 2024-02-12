@@ -110,7 +110,6 @@ class Test:
             if event in (sg.WIN_CLOSED, "Exit"):
                 break
             elif event == "-ANSWER-":
-                print(values)
                 if not Test.checking_answer_selected(values):
                     continue
                 count += 1
@@ -176,7 +175,6 @@ class Test:
                     self.score_points(count - 1, 1)
                 elif key == "-ANSW3-":
                     self.score_points(count - 1, 2)
-        print(self.green, self.red, self.blue)
 
     def score_points(self, count: int, i: int) -> None:
         """Score points based on the selected answer.
