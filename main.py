@@ -1,4 +1,7 @@
-
+from app import Test
 
 if __name__ == "__main__":
-    print('Done')
+    filename_test = "test.txt" 
+
+    test = Test(filename_test)
+    test.start()
