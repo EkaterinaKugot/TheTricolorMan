@@ -22,8 +22,7 @@ class Loader:
         :rtype: list
         """
         test = []
-        currentdir = os.path.dirname(os.path.abspath(__file__))
-        test_file = os.path.join(currentdir, 'data', self.filename_test)
+        test_file = self.current_path(self.filename_test)
         if(os.path.isfile(test_file)):
             with open(test_file, "r", encoding="utf-8") as f:
                 for line in f:
@@ -37,6 +36,18 @@ class Loader:
         else:
             raise FileNotFoundError("The test file does not exist")
         return test
+    
+    def current_path(filename: str) -> str:
+        """Creates the correct path to text files in the data folder
+        
+        :param filename: Text file name
+        :type filename: str
+        :return: Returns the full and correct path to the file
+        :rtype: str
+        """
+        currentdir = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(currentdir, 'data', filename)
+        return path
 
     def determine_type_answer(self, i: int, test: list) -> AnswerType:
         """Determine the type of answer based on the index.
@@ -81,8 +92,9 @@ class Loader:
         :return: Result for green responses
         :rtype: str
         """
-        if(os.path.isfile(filename_green)):
-            with open(filename_green, "r", encoding="utf-8") as f:
+        filename = self.current_path(filename_green)
+        if(os.path.isfile(filename)):
+            with open(filename, "r", encoding="utf-8") as f:
                 green = f.read()
                 return green
         raise FileNotFoundError("The green file does not exist")
@@ -96,8 +108,9 @@ class Loader:
         :return: Result for red responses
         :rtype: str
         """
-        if(os.path.isfile(filename_red)):
-            with open(filename_red, "r", encoding="utf-8") as f:
+        filename = self.current_path(filename_red)
+        if(os.path.isfile(filename)):
+            with open(filename, "r", encoding="utf-8") as f:
                 red = f.read()
                 return red
         raise FileNotFoundError("The red file does not exist")
@@ -111,8 +124,9 @@ class Loader:
         :return: Result for blue responses
         :rtype: str
         """
-        if(os.path.isfile(filename_blue)):
-            with open(filename_blue, "r", encoding="utf-8") as f:
+        filename = self.current_path(filename_blue)
+        if(os.path.isfile(filename)):
+            with open(filename, "r", encoding="utf-8") as f:
                 blue = f.read()
                 return blue
         raise FileNotFoundError("The blue file does not exist")
