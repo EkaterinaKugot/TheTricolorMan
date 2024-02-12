@@ -131,6 +131,3 @@ class Loader:
                 blue = f.read()
                 return blue
         raise FileNotFoundError("The blue file does not exist")
-
-
-    

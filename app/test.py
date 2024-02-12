@@ -224,7 +224,10 @@ class Test:
             text_color="green",
         )
         text = sg.Text(
-            green_text, key="-TEXT-", font=("Arial", 12), pad=((10, 10), (10, 0))
+            green_text,
+            key="-TEXT-",
+            font=("Arial", 12),
+            pad=((10, 10), (10, 0)),
         )
         button = sg.Button(
             "Далее",
