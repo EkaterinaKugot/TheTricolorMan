@@ -23,18 +23,16 @@ class Test:
     def __init__(self, filename_test: str):
         """Constructor method"""
         self.loader = Loader(filename_test)
-        self.rnd_questions = None
+        self.rnd_questions = self.loader.read_test_file()
         self.green = 0
         self.red = 0
         self.blue = 0
 
     def random_questions(self) -> None:
         """Randomly shuffles questions and answers"""
-        questions = self.loader.read_test_file()
-        for q in questions:
+        for q in self.rnd_questions:
             random.shuffle(q.answers)
-        random.shuffle(questions)
-        self.rnd_questions = questions
+        random.shuffle(self.rnd_questions)
 
     def start(self) -> None:
         """Starts test with results"""
