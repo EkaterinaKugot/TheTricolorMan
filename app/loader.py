@@ -22,7 +22,7 @@ class Loader:
         :rtype: list
         """
         test = []
-        test_file = self.current_path(self.filename_test)
+        test_file = Loader.current_path(self.filename_test)
         if(os.path.isfile(test_file)):
             with open(test_file, "r", encoding="utf-8") as f:
                 for line in f:
@@ -37,6 +37,7 @@ class Loader:
             raise FileNotFoundError("The test file does not exist")
         return test
     
+    @staticmethod
     def current_path(filename: str) -> str:
         """Creates the correct path to text files in the data folder
         
@@ -46,7 +47,7 @@ class Loader:
         :rtype: str
         """
         currentdir = os.path.dirname(os.path.abspath(__file__))
-        path = os.path.join(currentdir, 'data', filename)
+        path = os.path.join(currentdir, "data", filename)
         return path
 
     def determine_type_answer(self, i: int, test: list) -> AnswerType:
